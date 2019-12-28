@@ -1,6 +1,6 @@
 <?php
 
-namespace Chriscreates\Blogger;
+namespace Chrisjk123\Blogger;
 
 use Illuminate\Support\ServiceProvider;
 

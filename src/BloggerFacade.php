@@ -1,11 +1,11 @@
 <?php
 
-namespace Chriscreates\Blogger;
+namespace Chrisjk123\Blogger;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Chriscreates\Blogger\Skeleton\SkeletonClass
+ * @see \chrisjk123\Blogger\Skeleton\SkeletonClass
  */
 class BloggerFacade extends Facade
 {

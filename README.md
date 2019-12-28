@@ -1,9 +1,9 @@
 # Very short description of the package
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/chriscreates/blogger.svg?style=flat-square)](https://packagist.org/packages/chriscreates/blogger)
-[![Build Status](https://img.shields.io/travis/chriscreates/blogger/master.svg?style=flat-square)](https://travis-ci.org/chriscreates/blogger)
-[![Quality Score](https://img.shields.io/scrutinizer/g/chriscreates/blogger.svg?style=flat-square)](https://scrutinizer-ci.com/g/chriscreates/blogger)
-[![Total Downloads](https://img.shields.io/packagist/dt/chriscreates/blogger.svg?style=flat-square)](https://packagist.org/packages/chriscreates/blogger)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/chrisjk123/blogger.svg?style=flat-square)](https://packagist.org/packages/chrisjk123/blogger)
+[![Build Status](https://img.shields.io/travis/chrisjk123/blogger/master.svg?style=flat-square)](https://travis-ci.org/chrisjk123/blogger)
+[![Quality Score](https://img.shields.io/scrutinizer/g/chrisjk123/blogger.svg?style=flat-square)](https://scrutinizer-ci.com/g/chrisjk123/blogger)
+[![Total Downloads](https://img.shields.io/packagist/dt/chrisjk123/blogger.svg?style=flat-square)](https://packagist.org/packages/chrisjk123/blogger)
 
 This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what PSRs you support to avoid any confusion with users and contributors.
 
@@ -12,7 +12,7 @@ This is where your description should go. Try and limit it to a paragraph or two
 You can install the package via composer:
 
 ```bash
-composer require chriscreates/blogger
+composer require chrisjk123/blogger
 ```
 
 ## Usage
@@ -41,7 +41,7 @@ If you discover any security related issues, please email christopherjk123@gmail
 
 ## Credits
 
-- [Christopher Kelker](https://github.com/chriscreates)
+- [Christopher Kelker](https://github.com/chrisjk123)
 - [All Contributors](../../contributors)
 
 ## License
