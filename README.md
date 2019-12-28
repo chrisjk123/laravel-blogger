@@ -15,6 +15,10 @@ You can install the package via composer:
 composer require chrisjk123/blogger
 ```
 
+```bash
+php artisan vendor:publish --provider="Chrisjk123\Blogger\BloggerServiceProvider"
+```
+
 ## Usage
 
 ``` php
