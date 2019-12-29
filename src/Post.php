@@ -2,11 +2,18 @@
 
 namespace Chrisjk123\Blogger;
 
+use Chrisjk123\Blogger\Traits\PostAttributes;
+use Chrisjk123\Blogger\Traits\PostScopes;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
 
 class Post extends Model
 {
+    use PostScopes, PostAttributes;
+
+    const PUBLISHED = 'published';
+    const DRAFT = 'draft';
+    const SCHEDULED = 'scheduled';
+
     protected $table = 'posts';
 
     protected $primaryKey = 'id';
@@ -14,6 +21,8 @@ class Post extends Model
     public $guarded = [];
 
     public $timestamps = true;
+
+    protected $appends = ['tagsCount'];
 
     public function category()
     {
@@ -30,21 +39,8 @@ class Post extends Model
         return $this->morphToMany(Tag::class, 'taggable');
     }
 
-    public function scopeWhereCategories($query, $categories = null)
-    {
-        $query->with('category');
-
-        if (is_null($categories)) {
-            return $query;
-        }
-
-        if ($categories instanceof Collection) {
-            return $query->whereIn(
-                'category_id',
-                $categories->pluck('id')->toArray()
-            );
-        }
-
-        return $query->where('category_id', $categories->id);
-    }
+    // public function path()
+    // {
+    //     return "/posts/{$this->slug}";
+    // }
 }
