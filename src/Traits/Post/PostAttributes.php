@@ -1,12 +1,23 @@
 <?php
 
-namespace Chrisjk123\Blogger\Traits;
+namespace Chrisjk123\Blogger\Traits\Post;
 
 trait PostAttributes
 {
     public function getTagsCountAttribute()
     {
         return $this->tags->count();
+    }
+
+    public function isPublished()
+    {
+        return $this->status == self::PUBLISHED;
+    }
+
+    public function notPublished()
+    {
+        return $this->status == self::DRAFT
+        || $this->status == self::SCHEDULED;
     }
 
     public function getTimeToReadAttribute()

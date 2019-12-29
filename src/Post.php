@@ -2,8 +2,9 @@
 
 namespace Chrisjk123\Blogger;
 
-use Chrisjk123\Blogger\Traits\PostAttributes;
-use Chrisjk123\Blogger\Traits\PostScopes;
+use App\User;
+use Chrisjk123\Blogger\Traits\Post\PostAttributes;
+use Chrisjk123\Blogger\Traits\Post\PostScopes;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
@@ -24,6 +25,8 @@ class Post extends Model
 
     protected $appends = ['tagsCount'];
 
+    protected $dates = ['published_at'];
+
     public function category()
     {
         return $this->hasOne(Category::class, 'category_id');
@@ -39,8 +42,8 @@ class Post extends Model
         return $this->morphToMany(Tag::class, 'taggable');
     }
 
-    // public function path()
-    // {
-    //     return "/posts/{$this->slug}";
-    // }
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
