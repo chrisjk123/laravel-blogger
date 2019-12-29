@@ -14,6 +14,14 @@ class BloggerServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../database/migrations/' => database_path('migrations'),
         ], 'migrations');
+
+        $this->publishes([
+            __DIR__.'/../database/factories/' => database_path('factories'),
+        ], 'factories');
+
+        $this->publishes([
+            __DIR__.'/../database/seeds/' => database_path('seeds'),
+        ], 'seeders');
     }
 
     /**
