@@ -19,12 +19,11 @@ class CreatePostsTable extends Migration
 
             $table->string('name');
             $table->string('slug');
-            $table->string('excerpt');
-            $table->text('content');
-            $table->string('status');
+            $table->string('excerpt')->nullable();
+            $table->text('content')->nullable();
+            $table->string('status')->nullable();
 
             $table->timestamp('published_at');
-
             $table->timestamps();
             $table->softDeletes();
         });

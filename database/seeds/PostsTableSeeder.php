@@ -1,6 +1,6 @@
 <?php
 
-use Chrisjk123\Blogger\Category;
+use Chrisjk123\Blogger\Comment;
 use Chrisjk123\Blogger\Post;
 use Chrisjk123\Blogger\Tag;
 use Illuminate\Database\Seeder;
@@ -14,10 +14,16 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Tag::class, 25)->create();
+        factory(Post::class, 20)
+         ->create()
+         ->each(function ($post) {
+             $post->tags()->sync(
+                 factory(Tag::class, 4)->create()->pluck('id')->toArray()
+             );
 
-        factory(Category::class, 12)->create();
-
-        factory(Post::class, 200)->create();
+             $post->comments()->save(factory(Comment::class)->make());
+             $post->comments()->save(factory(Comment::class)->make());
+             $post->comments()->save(factory(Comment::class)->make());
+         });
     }
 }

@@ -8,7 +8,7 @@ $factory->define(Category::class, function (Faker $faker) {
     $title = $faker->name;
 
     return [
-        'title' => $title,
+        'name' => $title,
         'slug' => Str::slug($title),
         'parent_id' => null,
     ];

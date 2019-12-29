@@ -9,10 +9,12 @@ $factory->define(Post::class, function (Faker $faker) {
     $title = $faker->name;
 
     return [
-        'title' => $title,
+        'category_id' => factory(Category::class)->create()->id,
+        'name' => $title,
         'slug' => Str::slug($title),
         'excerpt' => $faker->name,
         'content' => $faker->paragraph,
-        'category_id' => factory(Category::class)->create()->id,
+        'status' => 'published',
+        'published_at' => now(),
     ];
 });
