@@ -6,7 +6,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/chrisjk123/blogger.svg?style=flat-square)](https://packagist.org/packages/chrisjk123/blogger)
 
 
-This package offers fully blog database tables as well as preset models with relations, scopes and seeders.
+This package is a blogging database with maxed out models, migrations and seeders to help get you setup. After the package is installed the only thing you have to do is add the `Chrisjk123\Blogger\Traits\User\HasPosts` trait to an Eloquent model to associate the users.
 
 Here are some code examples:
 
@@ -89,10 +89,23 @@ You can publish the seeder with:
 php artisan vendor:publish --provider="Chrisjk123\Blogger\BloggerServiceProvider" --tag="seeders"
 ```
 
-## Usage
+## Documentation
+
+All you have to do is add the `HasPosts` to your User model to get started.
 
 ``` php
-// Usage description here
+namespace App;
+
+use Chrisjk123\Blogger\Traits\User\HasPosts;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+
+class User extends Authenticatable
+{
+    use Notifiable, HasPosts;
+
+    // ...
+}
 ```
 ### Changelog
 
