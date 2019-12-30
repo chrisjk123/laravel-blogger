@@ -11,6 +11,12 @@ This package is a blogging database with maxed out models, migrations and seeder
 Here are some code examples:
 
 ```php
+// Alias namespace path:
+// Chriscreates\Blog\Post
+// Chriscreates\Blog\Category
+// Chriscreates\Blog\Tag
+// Chriscreates\Blog\Comment
+
 // Search by the short whereCategories method OR use whereCategory() and specify the field
 $results = Post::whereCategories($categories = null)->get();
 $results = Post::whereCategory($field, $operator, $value)->get();
@@ -77,19 +83,14 @@ composer require chrisjk123/laravel-blogger
 You can publish the migrations with:
 
 ```bash
-php artisan vendor:publish --provider="Chriscreate\Blog\BloggerServiceProvider" --tag="migrations"
-```
-
-Publish the migrations:
-
-```bash
+php artisan vendor:publish --provider="Chriscreates\Blog\BloggerServiceProvider" --tag="migrations"
 php artisan migrate
 ```
 
 You can optionally publish the config file with:
 
 ```bash
-php artisan vendor:publish --provider="Chriscreate\Blog\BloggerServiceProvider" --tag="config"
+php artisan vendor:publish --provider="Chriscreates\Blog\BloggerServiceProvider" --tag="config"
 ```
 
 This is the contents of the published config file, if your `User` class is
@@ -103,29 +104,25 @@ return [
     'user_class' => \App\User::class,
     'user_key_name' => 'id',
 ];
-
 ```
+
+## Local testing
 
 You can publish the factories with:
 
 ```bash
-php artisan vendor:publish --provider="Chriscreate\Blog\BloggerServiceProvider" --tag="factories"
+php artisan vendor:publish --provider="Chriscreates\Blog\BloggerServiceProvider" --tag="factories"
+php artisan vendor:publish --provider="Chriscreates\Blog\BloggerServiceProvider" --tag="seeders"
 ```
 
-You can publish the seeder with:
-
-```bash
-php artisan vendor:publish --provider="Chriscreate\Blog\BloggerServiceProvider" --tag="seeders"
-```
-
-## Documentation
+## Usage
 
 All you have to do is add the `HasPosts` to your User model to get started.
 
 ``` php
 namespace App;
 
-use Chriscreate\Blog\Traits\User\HasPosts;
+use Chriscreates\Blog\Traits\User\HasPosts;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -136,13 +133,13 @@ class User extends Authenticatable
     // ...
 }
 
-
 // Retrieve the posts created by the user(s)
 $user->posts;
 
 // Retrieve the comments created by the user(s)
 $user->comments;
 ```
+
 ### Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
