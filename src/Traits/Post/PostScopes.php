@@ -12,49 +12,85 @@ trait PostScopes
 {
     public function scopeWhereCategories(Builder $query, $categories = null)
     {
-        if (is_null($categories)) {
-            return $query;
-        }
-
+        // search by category name
         if (is_string($categories)) {
-            return $this->whereCategory($categories, 'name');
+            return $this->whereCategory('name', $categories);
         }
 
+        // search by category id
         if (is_int($categories)) {
-            return $this->whereCategory($categories, 'id');
+            return $this->whereCategory('id', $categories);
         }
 
+        // search by multiple categories
         if (is_array($categories)) {
-            return $query->with('category')
-            ->whereHas('category', function (Builder $query) use ($categories) {
-                return $query->whereIn('id', $categories);
-            });
+            if (is_int($categories[0])) {
+                $field = 'id';
+            } else {
+                $field = 'name';
+            }
+
+            return $this->whereCategory($field, $categories);
         }
 
+        // search by category model
         if ($categories instanceof Category) {
-            return $this->whereCategory($categories->id, 'id');
+            return $this->whereCategory('id', $categories->id);
         }
 
+        // search by categories collection
         if ($categories instanceof Collection) {
-            return $query->with('category')
-            ->whereHas('category', function (Builder $query) use ($categories) {
-                return $query->whereIn(
-                    'id',
-                    $categories->pluck('id')->toArray()
-                );
-            });
+            return $this->whereCategory('id', $categories->pluck('id')->toArray());
         }
 
         return $query;
     }
 
-    public function scopeWhereCategory(Builder $query, $category, $type = 'name')
+    public function scopeWhereCategory(Builder $query, ...$options)
     {
+        $collection = collect([
+            'field' => 'id',
+            'operator' => '=',
+            'value' => null,
+        ]);
+
+        // Search by field and value
+        if (count($options) == 2) {
+            $collection = $collection->replace(['field' => $options[0]])
+            ->replace(['value' => $options[1]]);
+        }
+
+        // Search by field, operator and value
+        if (count($options) == 3) {
+            $collection = $collection->replace(['field' => $options[0]])
+            ->replace(['operator' => $options[1]])
+            ->replace(['value' => $options[2]]);
+        }
+
         $query->with('category');
 
-        return $query->whereHas('category', function (Builder $query) use ($type, $category) {
-            return $query->where($type, $category);
-        });
+        if (is_array($collection['value'])) {
+            return $query->whereHas(
+                'category',
+                function (Builder $query) use ($collection) {
+                    return $query->whereIn(
+                        $collection['field'],
+                        $collection['value']
+                    );
+                }
+            );
+        }
+
+        return $query->whereHas(
+            'category',
+            function (Builder $query) use ($collection) {
+                return $query->where(
+                    $collection['field'],
+                    $collection['operator'],
+                    $collection['value']
+                );
+            }
+        );
     }
 
     public function scopeRelatedByPostTags(Builder $query, Post $post)
