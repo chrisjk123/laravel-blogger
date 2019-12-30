@@ -14,7 +14,7 @@ trait PostAttributes
         return $this->status == self::PUBLISHED;
     }
 
-    public function notPublished()
+    public function isNotPublished()
     {
         return $this->status == self::DRAFT
         || $this->status == self::SCHEDULED;

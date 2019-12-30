@@ -2,12 +2,16 @@
 
 namespace Chrisjk123\Blogger;
 
+use Chrisjk123\Blogger\Traits\Comment\CommentApproval;
 use Chrisjk123\Blogger\Traits\Comment\CommentScopes;
+use Chrisjk123\Blogger\Traits\IsAuthorable;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    use CommentScopes;
+    use CommentScopes,
+    CommentApproval,
+    IsAuthorable;
 
     protected $table = 'comments';
 
@@ -20,10 +24,5 @@ class Comment extends Model
     public function commentable()
     {
         return $this->morphTo();
-    }
-
-    public function author()
-    {
-        return $this->belongsTo(User::class, 'user_id');
     }
 }

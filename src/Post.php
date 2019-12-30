@@ -2,14 +2,18 @@
 
 namespace Chrisjk123\Blogger;
 
-use App\User;
+use Chrisjk123\Blogger\Traits\IsAuthorable;
 use Chrisjk123\Blogger\Traits\Post\PostAttributes;
 use Chrisjk123\Blogger\Traits\Post\PostScopes;
+use Chrisjk123\Blogger\Traits\Post\PostsHaveComments;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    use PostScopes, PostAttributes;
+    use PostScopes,
+    PostAttributes,
+    IsAuthorable,
+    PostsHaveComments;
 
     const PUBLISHED = 'published';
     const DRAFT = 'draft';
@@ -40,10 +44,5 @@ class Post extends Model
     public function tags()
     {
         return $this->morphToMany(Tag::class, 'taggable');
-    }
-
-    public function author()
-    {
-        return $this->belongsTo(User::class, 'id', 'user_id');
     }
 }

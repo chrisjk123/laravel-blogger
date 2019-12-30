@@ -22,19 +22,13 @@ class BloggerServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../database/seeds/' => database_path('seeds'),
         ], 'seeders');
+
+        $this->publishes([
+            __DIR__.'/../config/blogs.php' => config_path('blogs.php'),
+        ], 'config');
     }
 
-    /**
-     * Register the application services.
-     */
     public function register()
     {
-        // Automatically apply the package configuration
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'blogger');
-
-        // Register the main class to use with the facade
-        $this->app->singleton('blogger', function () {
-            return new Blogger;
-        });
     }
 }

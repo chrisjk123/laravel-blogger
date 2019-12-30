@@ -51,6 +51,15 @@ Chrisjk123\Blogger\Post::publishedLastWeek()->get();
 
 // Search by unpublished Posts only
 Chrisjk123\Blogger\Post::notPublished()->get();
+
+// Search by scheduled Posts only
+Chrisjk123\Blogger\Post::scheduled()->get();
+
+// Search by drafted Posts only
+Chrisjk123\Blogger\Post::draft()->get();
+
+// Order by latest published
+Chrisjk123\Blogger\Post::orderByLatest()->get();
 ```
 
 ## Requirements
@@ -106,6 +115,13 @@ class User extends Authenticatable
 
     // ...
 }
+
+
+// Retrieve the posts created by the user(s)
+$user->posts;
+
+// Retrieve the comments created by the user(s)
+$user->comments;
 ```
 ### Changelog
 
