@@ -1,8 +1,8 @@
 <?php
 
-namespace Chriscreate\Blog\Traits\Post;
+namespace Chriscreates\Blog\Traits\Post;
 
-use Chriscreate\Blog\Post;
+use Chriscreates\Blog\Post;
 use Illuminate\Database\Eloquent\Builder;
 
 trait PostTagScopes

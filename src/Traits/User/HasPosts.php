@@ -1,8 +1,8 @@
 <?php
 
-namespace Chriscreate\Blog\Traits\User;
+namespace Chriscreates\Blog\Traits\User;
 
-use Chriscreate\Blog\Post;
+use Chriscreates\Blog\Post;
 
 trait HasPosts
 {

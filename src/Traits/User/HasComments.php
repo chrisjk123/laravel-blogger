@@ -1,8 +1,8 @@
 <?php
 
-namespace Chriscreate\Blog\Traits\User;
+namespace Chriscreates\Blog\Traits\User;
 
-use Chriscreate\Blog\Comment;
+use Chriscreates\Blog\Comment;
 
 trait HasComments
 {

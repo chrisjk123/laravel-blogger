@@ -1,11 +1,11 @@
 <?php
 
-namespace Chriscreate\Blog;
+namespace Chriscreates\Blog;
 
-use Chriscreate\Blog\Traits\IsAuthorable;
-use Chriscreate\Blog\Traits\Post\PostAttributes;
-use Chriscreate\Blog\Traits\Post\PostScopes;
-use Chriscreate\Blog\Traits\Post\PostsHaveComments;
+use Chriscreates\Blog\Traits\IsAuthorable;
+use Chriscreates\Blog\Traits\Post\PostAttributes;
+use Chriscreates\Blog\Traits\Post\PostScopes;
+use Chriscreates\Blog\Traits\Post\PostsHaveComments;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model

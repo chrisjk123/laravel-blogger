@@ -1,6 +1,6 @@
 <?php
 
-use Chriscreate\Blog\Tag;
+use Chriscreatess\Blog\Tag;
 use Faker\Generator as Faker;
 
 $factory->define(Tag::class, function (Faker $faker) {

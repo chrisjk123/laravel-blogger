@@ -1,6 +1,6 @@
 <?php
 
-namespace Chriscreate\Blog\Traits\Post;
+namespace Chriscreates\Blog\Traits\Post;
 
 use Illuminate\Database\Eloquent\Model;
 
