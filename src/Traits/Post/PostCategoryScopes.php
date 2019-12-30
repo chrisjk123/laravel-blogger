@@ -1,9 +1,9 @@
 <?php
 
-namespace Chrisjk123\Blogger\Traits\Post;
+namespace Chriscreate\Blog\Traits\Post;
 
-use Chrisjk123\Blogger\Category;
-use Chrisjk123\Blogger\Post;
+use Chriscreate\Blog\Category;
+use Chriscreate\Blog\Post;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Chrisjk123\Blogger\Tests;
+namespace Chriscreate\Blog\Tests;
 
 use PHPUnit\Framework\TestCase;
 

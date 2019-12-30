@@ -1,6 +1,6 @@
 <?php
 
-namespace Chrisjk123\Blogger\Traits\Comment;
+namespace Chriscreate\Blog\Traits\Comment;
 
 trait CommentApproval
 {

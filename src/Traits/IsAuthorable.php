@@ -1,6 +1,6 @@
 <?php
 
-namespace Chrisjk123\Blogger\Traits;
+namespace Chriscreate\Blog\Traits;
 
 trait IsAuthorable
 {

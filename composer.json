@@ -1,6 +1,6 @@
 {
     "name": "chrisjk123/laravel-blogger",
-    "description": "Blog package",
+    "description": "blog package",
     "keywords": [
         "chrisjk123",
         "laravel",
@@ -8,7 +8,7 @@
         "blog",
         "blogger"
     ],
-    "homepage": "https://github.com/Chrisjk123/laravel-blogger",
+    "homepage": "https://github.com/chrisjk123/laravel-blogger",
     "license": "MIT",
     "type": "library",
     "authors": [
@@ -28,12 +28,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Chrisjk123\\Blogger\\": "src"
+            "Chriscreates\\Blog\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Chrisjk123\\Blogger\\Tests\\": "tests"
+            "Chriscreates\\Blog\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -47,11 +47,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Chrisjk123\\Blogger\\BloggerServiceProvider"
-            ],
-            "aliases": {
-                "Blogger": "Chrisjk123\\Blogger\\BloggerFacade"
-            }
+                "Chriscreates\\Blog\\BlogServiceProvider"
+            ]
         }
     }
 }

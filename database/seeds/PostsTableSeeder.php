@@ -1,8 +1,8 @@
 <?php
 
-use Chrisjk123\Blogger\Comment;
-use Chrisjk123\Blogger\Post;
-use Chrisjk123\Blogger\Tag;
+use Chriscreate\Blog\Comment;
+use Chriscreate\Blog\Post;
+use Chriscreate\Blog\Tag;
 use Illuminate\Database\Seeder;
 
 class PostsTableSeeder extends Seeder

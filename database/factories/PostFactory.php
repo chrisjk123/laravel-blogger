@@ -1,7 +1,7 @@
 <?php
 
-use Chrisjk123\Blogger\Category;
-use Chrisjk123\Blogger\Post;
+use Chriscreate\Blog\Category;
+use Chriscreate\Blog\Post;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 

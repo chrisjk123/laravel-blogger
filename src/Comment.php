@@ -1,10 +1,10 @@
 <?php
 
-namespace Chrisjk123\Blogger;
+namespace Chriscreate\Blog;
 
-use Chrisjk123\Blogger\Traits\Comment\CommentApproval;
-use Chrisjk123\Blogger\Traits\Comment\CommentScopes;
-use Chrisjk123\Blogger\Traits\IsAuthorable;
+use Chriscreate\Blog\Traits\Comment\CommentApproval;
+use Chriscreate\Blog\Traits\Comment\CommentScopes;
+use Chriscreate\Blog\Traits\IsAuthorable;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model

@@ -6,60 +6,60 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/chrisjk123/laravel-blogger.svg?style=flat-square)](https://packagist.org/packages/chrisjk123/laravel-blogger)
 
 
-This package is a blogging database with maxed out models, migrations and seeders to help get you setup. After the package is installed the only thing you have to do is add the `Chrisjk123\Blogger\Traits\User\HasPosts` trait to an Eloquent model to associate the users.
+This package is a blogging database with maxed out models, migrations and seeders to help get you setup. After the package is installed the only thing you have to do is add the `HasPosts` trait to an Eloquent model to associate the users.
 
 Here are some code examples:
 
 ```php
 // Search by the short whereCategories method OR use whereCategory() and specify the field
-$results = Chrisjk123\Blogger\Post::whereCategories($categories = null)->get();
-$results = Chrisjk123\Blogger\Post::whereCategory($field, $operator, $value)->get();
+$results = Post::whereCategories($categories = null)->get();
+$results = Post::whereCategory($field, $operator, $value)->get();
 
 // Search by Category ID OR IDs
-$results = Chrisjk123\Blogger\Post::whereCategories(1)->get();
-$results = Chrisjk123\Blogger\Post::whereCategory('id', 1)->get();
+$results = Post::whereCategories(1)->get();
+$results = Post::whereCategory('id', 1)->get();
 ----------
-$results = Chrisjk123\Blogger\Post::whereCategories([3, 6, 7])->get();
-$results = Chrisjk123\Blogger\Post::whereCategory('id', [3, 6, 7])->get();
+$results = Post::whereCategories([3, 6, 7])->get();
+$results = Post::whereCategory('id', [3, 6, 7])->get();
 
 // Search by Category name OR names
-$results = Chrisjk123\Blogger\Post::whereCategories('Izabella Bins II')->get();
-$results = Chrisjk123\Blogger\Post::whereCategory('name', 'Izabella Bins II')->get();
+$results = Post::whereCategories('Izabella Bins II')->get();
+$results = Post::whereCategory('name', 'Izabella Bins II')->get();
 ----------
-$results = Chrisjk123\Blogger\Post::whereCategories(['Izabella Bins II', 'Osborne Fay'])->get();
-$results = Chrisjk123\Blogger\Post::whereCategory('name', ['Izabella Bins II', 'Osborne Fay'])->get();
+$results = Post::whereCategories(['Izabella Bins II', 'Osborne Fay'])->get();
+$results = Post::whereCategory('name', ['Izabella Bins II', 'Osborne Fay'])->get();
 
 // Search by Category model or a Category Collection
-$category = Chrisjk123\Blogger\Category::where('id', 7)->first();
-$results = Chrisjk123\Blogger\Post::whereCategories($category)->get();
+$category = Category::where('id', 7)->first();
+$results = Post::whereCategories($category)->get();
 ----------
-$categories = Chrisjk123\Blogger\Category::whereIn('id', [3, 6, 7])->get();
-$results = Chrisjk123\Blogger\Post::whereCategories($categories)->get();
+$categories = Category::whereIn('id', [3, 6, 7])->get();
+$results = Post::whereCategories($categories)->get();
 
 // Search by related Post (tags or category)
-$post = Chrisjk123\Blogger\Post::find(8);
-$results = Chrisjk123\Blogger\Post::relatedByPostTags($post)->get();
+$post = Post::find(8);
+$results = Post::relatedByPostTags($post)->get();
 ----------
-$results = Chrisjk123\Blogger\Post::relatedByPostCategory($post)->get();
+$results = Post::relatedByPostCategory($post)->get();
 
 // Search by published Posts only
-Chrisjk123\Blogger\Post::published()->get();
+Post::published()->get();
 ----------
-Chrisjk123\Blogger\Post::publishedLastMonth()->get();
+Post::publishedLastMonth()->get();
 ----------
-Chrisjk123\Blogger\Post::publishedLastWeek()->get();
+Post::publishedLastWeek()->get();
 
 // Search by unpublished Posts only
-Chrisjk123\Blogger\Post::notPublished()->get();
+Post::notPublished()->get();
 
 // Search by scheduled Posts only
-Chrisjk123\Blogger\Post::scheduled()->get();
+Post::scheduled()->get();
 
 // Search by drafted Posts only
-Chrisjk123\Blogger\Post::draft()->get();
+Post::draft()->get();
 
 // Order by latest published
-Chrisjk123\Blogger\Post::orderByLatest()->get();
+Post::orderByLatest()->get();
 ```
 
 ## Requirements
@@ -77,7 +77,7 @@ composer require chrisjk123/laravel-blogger
 You can publish the migrations with:
 
 ```bash
-php artisan vendor:publish --provider="Chrisjk123\Blogger\BloggerServiceProvider" --tag="migrations"
+php artisan vendor:publish --provider="Chriscreate\Blog\BloggerServiceProvider" --tag="migrations"
 ```
 
 Publish the migrations:
@@ -86,16 +86,36 @@ Publish the migrations:
 php artisan migrate
 ```
 
+You can optionally publish the config file with:
+
+```bash
+php artisan vendor:publish --provider="Chriscreate\Blog\BloggerServiceProvider" --tag="config"
+```
+
+This is the contents of the published config file, if your `User` class is
+within a different directory, you can change it here as well as the User primary key:
+
+```php
+return [
+    /*
+     * The default path to the User model in Laravel
+     */
+    'user_class' => \App\User::class,
+    'user_key_name' => 'id',
+];
+
+```
+
 You can publish the factories with:
 
 ```bash
-php artisan vendor:publish --provider="Chrisjk123\Blogger\BloggerServiceProvider" --tag="factories"
+php artisan vendor:publish --provider="Chriscreate\Blog\BloggerServiceProvider" --tag="factories"
 ```
 
 You can publish the seeder with:
 
 ```bash
-php artisan vendor:publish --provider="Chrisjk123\Blogger\BloggerServiceProvider" --tag="seeders"
+php artisan vendor:publish --provider="Chriscreate\Blog\BloggerServiceProvider" --tag="seeders"
 ```
 
 ## Documentation
@@ -105,7 +125,7 @@ All you have to do is add the `HasPosts` to your User model to get started.
 ``` php
 namespace App;
 
-use Chrisjk123\Blogger\Traits\User\HasPosts;
+use Chriscreate\Blog\Traits\User\HasPosts;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
