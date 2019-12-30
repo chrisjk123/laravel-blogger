@@ -1,11 +1,14 @@
 {
-    "name": "chrisjk123/blogger",
+    "name": "chrisjk123/laravel-blogger",
     "description": "Blog package",
     "keywords": [
         "chrisjk123",
+        "laravel",
+        "laravel-blogger",
+        "blog",
         "blogger"
     ],
-    "homepage": "https://github.com/Chrisjk123/blogger",
+    "homepage": "https://github.com/Chrisjk123/laravel-blogger",
     "license": "MIT",
     "type": "library",
     "authors": [
