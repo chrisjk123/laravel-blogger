@@ -1,9 +1,9 @@
 # Add blog database tables to a Laravel app
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/chrisjk123/blogger.svg?style=flat-square)](https://packagist.org/packages/chrisjk123/blogger)
-[![Build Status](https://img.shields.io/travis/chrisjk123/blogger/master.svg?style=flat-square)](https://travis-ci.org/chrisjk123/blogger)
-[![Quality Score](https://img.shields.io/scrutinizer/g/chrisjk123/blogger.svg?style=flat-square)](https://scrutinizer-ci.com/g/chrisjk123/blogger)
-[![Total Downloads](https://img.shields.io/packagist/dt/chrisjk123/blogger.svg?style=flat-square)](https://packagist.org/packages/chrisjk123/blogger)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/chrisjk123/laravel-blogger.svg?style=flat-square)](https://packagist.org/packages/chrisjk123/laravel-blogger)
+[![Build Status](https://img.shields.io/travis/chrisjk123/laravel-blogger/master.svg?style=flat-square)](https://travis-ci.org/chrisjk123/laravel-blogger)
+[![Quality Score](https://img.shields.io/scrutinizer/g/chrisjk123/laravel-blogger.svg?style=flat-square)](https://scrutinizer-ci.com/g/chrisjk123/laravel-blogger)
+[![Total Downloads](https://img.shields.io/packagist/dt/chrisjk123/laravel-blogger.svg?style=flat-square)](https://packagist.org/packages/chrisjk123/laravel-blogger)
 
 
 This package is a blogging database with maxed out models, migrations and seeders to help get you setup. After the package is installed the only thing you have to do is add the `Chrisjk123\Blogger\Traits\User\HasPosts` trait to an Eloquent model to associate the users.
@@ -71,7 +71,7 @@ This package requires Laravel 5.8 or higher, PHP 7.2 or higher and a database th
 You can install the package via composer:
 
 ```bash
-composer require chrisjk123/blogger
+composer require chrisjk123/laravel-blogger
 ```
 
 You can publish the migrations with:
