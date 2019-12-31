@@ -17,7 +17,7 @@ trait PostsHaveACategory
             return false;
         }
 
-        return $category_id == $this->category->id;
+        return $category == $this->category->id;
     }
 
     public function hasAnyCategory($categories)
