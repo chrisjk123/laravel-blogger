@@ -2,6 +2,8 @@
 
 namespace Chriscreates\Blog\Traits;
 
+use Illuminate\Support\Facades\Auth;
+
 trait IsAuthorable
 {
     public function author()
@@ -20,5 +22,12 @@ trait IsAuthorable
             'user_id',
             config('blogs.user_key_name')
         );
+    }
+
+    public static function bootBelongsToUser()
+    {
+        static::saving(function ($model) {
+            $model->user_id = $model->user_id ?? Auth::id();
+        });
     }
 }

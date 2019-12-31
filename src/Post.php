@@ -5,6 +5,7 @@ namespace Chriscreates\Blog;
 use Chriscreates\Blog\Traits\IsAuthorable;
 use Chriscreates\Blog\Traits\Post\PostAttributes;
 use Chriscreates\Blog\Traits\Post\PostScopes;
+use Chriscreates\Blog\Traits\Post\PostsHaveACategory;
 use Chriscreates\Blog\Traits\Post\PostsHaveComments;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,7 +14,8 @@ class Post extends Model
     use PostScopes,
     PostAttributes,
     IsAuthorable,
-    PostsHaveComments;
+    PostsHaveComments,
+    PostsHaveACategory;
 
     const PUBLISHED = 'published';
     const DRAFT = 'draft';
@@ -44,5 +46,14 @@ class Post extends Model
     public function tags()
     {
         return $this->morphToMany(Tag::class, 'taggable');
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleted(function (Model $post) {
+            $post->tags()->detach();
+        });
     }
 }
