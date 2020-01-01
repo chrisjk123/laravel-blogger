@@ -2,6 +2,8 @@
 
 namespace Chriscreates\Blog\Traits\Post;
 
+use Carbon\Carbon;
+
 trait PostAttributes
 {
     public function getTagsCountAttribute()
@@ -11,13 +13,49 @@ trait PostAttributes
 
     public function isPublished()
     {
-        return $this->status == self::PUBLISHED;
+        return $this->status == self::PUBLISHED
+        && $this->published_at != null;
+    }
+
+    public function isDraft()
+    {
+        return $this->status == self::DRAFT
+        && $this->published_at == null;
+    }
+
+    public function isScheduled()
+    {
+        return $this->status == self::SCHEDULED
+        && $this->published_at > Carbon::now();
     }
 
     public function isNotPublished()
     {
-        return $this->status == self::DRAFT
-        || $this->status == self::SCHEDULED;
+        return $this->isDraft() || $this->isScheduled();
+    }
+
+    public function scheduleFor($date)
+    {
+        if ( ! $date instanceof Carbon) {
+            $date = new Carbon($date);
+        }
+
+        $this->update([
+            'status' => self::SCHEDULED,
+            'published_at' => $date,
+        ]);
+
+        return $this;
+    }
+
+    public function publish()
+    {
+        $this->update([
+            'status' => self::PUBLISHED,
+            'published_at' => now(),
+        ]);
+
+        return $this;
     }
 
     public function getTimeToReadAttribute()

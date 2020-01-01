@@ -16,15 +16,23 @@ trait CommentScopes
     {
         return $query->whereBetween('created_at', [
             Carbon::now()->subMonth(), Carbon::now(),
-        ])
-        ->latest();
+        ])->latest();
     }
 
     public function scopeLastWeek(Builder $query)
     {
         return $query->whereBetween('created_at', [
             Carbon::now()->subWeek(), Carbon::now(),
-        ])
-        ->latest();
+        ])->latest();
+    }
+
+    public function scopeApproved($query)
+    {
+        return $query->where('is_approved', true);
+    }
+
+    public function scopeUnapproved($query)
+    {
+        return $query->where('is_approved', false);
     }
 }

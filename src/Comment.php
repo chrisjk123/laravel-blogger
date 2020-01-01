@@ -21,6 +21,10 @@ class Comment extends Model
 
     public $timestamps = true;
 
+    protected $casts = [
+        'is_approved' => 'boolean',
+    ];
+
     public function commentable()
     {
         return $this->morphTo();

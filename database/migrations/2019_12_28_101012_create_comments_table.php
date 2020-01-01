@@ -20,6 +20,7 @@ class CreateCommentsTable extends Migration
             $table->text('content');
             $table->string('author')->nullable();
             $table->string('email')->nullable();
+            $table->boolean('is_approved')->nullable();
             $table->integer('commentable_id');
             $table->string('commentable_type');
             $table->timestamps();

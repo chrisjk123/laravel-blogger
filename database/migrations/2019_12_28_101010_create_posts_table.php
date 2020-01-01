@@ -24,6 +24,15 @@ class CreatePostsTable extends Migration
             $table->string('slug')->nullable();
             $table->string('excerpt')->nullable();
             $table->text('content')->nullable();
+
+            $table->boolean('allow_comments')->default(
+                config('blogs.posts.allow_comments')
+            )->nullable();
+
+            $table->boolean('allow_guest_comments')->default(
+                config('blogs.posts.allow_guest_comments')
+            )->nullable();
+
             $table->string('status')->nullable();
             $table->timestamp('published_at')->nullable();
             $table->timestamps();

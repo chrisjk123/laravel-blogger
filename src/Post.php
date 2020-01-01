@@ -43,6 +43,16 @@ class Post extends Model
         return $this->morphMany(Comment::class, 'commentable');
     }
 
+    public function approvedComments()
+    {
+        return $this->comments()->where('is_approved', true);
+    }
+
+    public function disapprovedComments()
+    {
+        return $this->comments()->where('is_approved', false);
+    }
+
     public function tags()
     {
         return $this->morphToMany(Tag::class, 'taggable');
