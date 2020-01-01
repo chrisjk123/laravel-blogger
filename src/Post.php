@@ -56,4 +56,9 @@ class Post extends Model
             $post->tags()->detach();
         });
     }
+
+    public function path()
+    {
+        return "/posts/{$this->slug}";
+    }
 }
