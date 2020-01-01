@@ -80,7 +80,7 @@ You can install the package via composer:
 composer require chrisjk123/laravel-blogger
 ```
 
-You can publish the migrations with:
+Publish the migrations with:
 
 ```bash
 php artisan vendor:publish --provider="Chriscreates\Blog\BloggerServiceProvider" --tag="migrations"
@@ -94,21 +94,34 @@ php artisan vendor:publish --provider="Chriscreates\Blog\BloggerServiceProvider"
 ```
 
 This is the contents of the published config file, if your `User` class is
-within a different directory, you can change it here as well as the User primary key:
+within a different directory or has a different primary key it can be changed here.
+
+Furthermore, the settings for allowing commenting on posts is set here, the default
+is set to true as well as guest commenting.
 
 ```php
 return [
     /*
-     * The default path to the User model in Laravel
+     * User: the default path to the User model in Laravel and primary key
      */
-    'user_class' => \App\User::class,
-    'user_key_name' => 'id',
+    'user' => [
+        'user_class' => \App\User::class,
+        'user_key_name' => 'id',
+    ],
+
+    /*
+     * Post: allow commenting on posts / allow guest commenting on posts
+     */
+    'posts' => [
+        'allow_comments' => true,
+        'allow_guest_comments' => true,
+    ],
 ];
 ```
 
 ## Local testing
 
-You can publish the factories with:
+For testing purposes, you can publish the factories with:
 
 ```bash
 php artisan vendor:publish --provider="Chriscreates\Blog\BloggerServiceProvider" --tag="factories"
@@ -136,7 +149,7 @@ class User extends Authenticatable
 // Retrieve the posts created by the user(s)
 $user->posts;
 
-// Retrieve the comments created by the user(s)
+// Retrieve the comments created by the guest/user(s)
 $user->comments;
 ```
 

@@ -1,6 +1,6 @@
 <?php
 
-use Chriscreatess\Blog\Category;
+use Chriscreates\Blog\Category;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 

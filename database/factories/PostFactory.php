@@ -1,7 +1,7 @@
 <?php
 
-use Chriscreatess\Blog\Category;
-use Chriscreatess\Blog\Post;
+use Chriscreates\Blog\Category;
+use Chriscreates\Blog\Post;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
@@ -10,7 +10,7 @@ $factory->define(Post::class, function (Faker $faker) {
 
     return [
         'category_id' => factory(Category::class)->create()->id,
-        'name' => $title,
+        'title' => $title,
         'slug' => Str::slug($title),
         'excerpt' => $faker->name,
         'content' => $faker->paragraph,

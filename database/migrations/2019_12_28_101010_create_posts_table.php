@@ -20,7 +20,7 @@ class CreatePostsTable extends Migration
             $table->integer('user_id')->nullable();
             $table->index('user_id');
             $table->string('title');
-            $table->string('sub_title');
+            $table->string('sub_title')->nullable();
             $table->string('slug')->nullable();
             $table->string('excerpt')->nullable();
             $table->text('content')->nullable();

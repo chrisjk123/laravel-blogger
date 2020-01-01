@@ -40,6 +40,15 @@ class Post extends Model
 
     public function comments()
     {
+        if ( ! $this->allow_comments) {
+            return null;
+        }
+
+        if ( ! $this->allow_guest_comments) {
+            return $this->morphMany(Comment::class, 'commentable')
+            ->whereNull('user_id');
+        }
+
         return $this->morphMany(Comment::class, 'commentable');
     }
 
@@ -53,18 +62,19 @@ class Post extends Model
         return $this->comments()->where('is_approved', false);
     }
 
+    public function guestComments()
+    {
+        return $this->comments()->whereNull('user_id');
+    }
+
+    public function userComments()
+    {
+        return $this->comments()->whereNotNull('user_id');
+    }
+
     public function tags()
     {
         return $this->morphToMany(Tag::class, 'taggable');
-    }
-
-    public static function boot()
-    {
-        parent::boot();
-
-        static::deleted(function (Model $post) {
-            $post->tags()->detach();
-        });
     }
 
     public function path()
