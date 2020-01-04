@@ -10,7 +10,7 @@ class Tag extends Model
 
     protected $primaryKey = 'id';
 
-    public $guarded = [];
+    public $guarded = ['id'];
 
     public $timestamps = true;
 

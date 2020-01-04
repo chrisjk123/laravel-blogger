@@ -10,12 +10,12 @@ class Category extends Model
 
     protected $primaryKey = 'id';
 
-    public $guarded = [];
+    public $guarded = ['id'];
 
     public $timestamps = true;
 
     public function posts()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Post::class, 'category_id', 'id');
     }
 }

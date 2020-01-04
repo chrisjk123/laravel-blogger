@@ -2,17 +2,16 @@
 
 namespace Chriscreates\Blog;
 
+use Chriscreates\Blog\Builders\PostBuilder;
 use Chriscreates\Blog\Traits\IsAuthorable;
 use Chriscreates\Blog\Traits\Post\PostAttributes;
-use Chriscreates\Blog\Traits\Post\PostScopes;
 use Chriscreates\Blog\Traits\Post\PostsHaveACategory;
 use Chriscreates\Blog\Traits\Post\PostsHaveComments;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    use PostScopes,
-    PostAttributes,
+    use PostAttributes,
     IsAuthorable,
     PostsHaveComments,
     PostsHaveACategory;
@@ -25,7 +24,7 @@ class Post extends Model
 
     protected $primaryKey = 'id';
 
-    public $guarded = [];
+    public $guarded = ['id'];
 
     public $timestamps = true;
 
@@ -75,6 +74,11 @@ class Post extends Model
     public function tags()
     {
         return $this->morphToMany(Tag::class, 'taggable');
+    }
+
+    public function newEloquentBuilder($query) : PostBuilder
+    {
+        return new PostBuilder($query);
     }
 
     public function path()
