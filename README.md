@@ -7,15 +7,15 @@
 
 ## Table of Contents
 
-[Introduction](#introduction)
-[Requirements](#requirements)
-[Installation](#installation)
-[Local testing](#local-testing)
-[Usage](#usage)
-[Changelog](#changelog)
-[Security](#security)
-[Credits](#credits)
-[License](#license)
+* [Introduction](#introduction)
+* [Requirements](#requirements)
+* [Installation](#installation)
+* [Local testing](#local-testing)
+* [Usage](#usage)
+* [Changelog](#changelog)
+* [Security](#security)
+* [Credits](#credits)
+* [License](#license)
 
 ## Introduction
 
