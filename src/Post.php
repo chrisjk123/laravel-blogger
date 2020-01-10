@@ -2,12 +2,14 @@
 
 namespace Chriscreates\Blog;
 
+use Carbon\Carbon;
 use Chriscreates\Blog\Builders\PostBuilder;
 use Chriscreates\Blog\Traits\IsAuthorable;
 use Chriscreates\Blog\Traits\Post\PostAttributes;
 use Chriscreates\Blog\Traits\Post\PostsHaveACategory;
 use Chriscreates\Blog\Traits\Post\PostsHaveComments;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Post extends Model
 {
@@ -84,5 +86,72 @@ class Post extends Model
     public function path()
     {
         return "/posts/{$this->slug}";
+    }
+
+    public function setPublished()
+    {
+        $this->status = self::PUBLISHED;
+        $this->published_at = now();
+
+        return $this;
+    }
+
+    public function setDrafted()
+    {
+        $this->status = self::DRAFT;
+        $this->published_at = null;
+
+        return $this;
+    }
+
+    public function setScheduled($publish_date = null)
+    {
+        if (is_null($publish_date)) {
+            $publish_date = request('published_at');
+        }
+
+        $this->status = self::SCHEDULED;
+        $this->published_at = new Carbon($publish_date);
+
+        return $this;
+    }
+
+    public function setStatus(string $status = null)
+    {
+        if (is_null($status)) {
+            $status = request('status');
+        }
+
+        if ($status == self::PUBLISHED) {
+            $this->setPublished();
+        }
+
+        if ($status == self::DRAFT) {
+            $this->setDrafted();
+        }
+
+        if ($status == self::SCHEDULED) {
+            $this->setScheduled(request('published_at'));
+        }
+
+        return $this;
+    }
+
+    public function setSlug(string $title = null)
+    {
+        $set_slug = ! is_null($title) ? $title : $this->title;
+
+        $this->slug = Str::slug($set_slug);
+
+        return $this;
+    }
+
+    public function statuses()
+    {
+        return collect([
+            self::PUBLISHED,
+            self::DRAFT,
+            self::SCHEDULED,
+        ]);
     }
 }
