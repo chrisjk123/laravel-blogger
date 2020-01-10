@@ -3,14 +3,12 @@
 namespace Chriscreates\Blog;
 
 use Chriscreates\Blog\Builders\CommentBuilder;
-use Chriscreates\Blog\Traits\Comment\CommentApproval;
 use Chriscreates\Blog\Traits\IsAuthorable;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    use CommentApproval,
-    IsAuthorable;
+    use IsAuthorable;
 
     protected $table = 'comments';
 

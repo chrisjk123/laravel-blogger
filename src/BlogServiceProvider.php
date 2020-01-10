@@ -94,7 +94,7 @@ class BlogServiceProvider extends ServiceProvider
     private function handleMigrations()
     {
         if ($this->app->runningInConsole()) {
-            $this->loadMigrationsFrom(__DIR__.'/../database/migrations/');
+            $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         }
     }
 
@@ -106,16 +106,19 @@ class BlogServiceProvider extends ServiceProvider
     private function handlePublishing()
     {
         if ($this->app->runningInConsole()) {
+
+            // TODO: Are these really needed?
             $this->publishes([
                 __DIR__.'/../database/factories/' => database_path('factories'),
             ], 'blog-factories');
 
+            // TODO: Are these really needed?
             $this->publishes([
                 __DIR__.'/../database/seeds/' => database_path('seeds'),
             ], 'blog-seeders');
 
             $this->publishes([
-                __DIR__.'/../config/blogs.php' => config_path('blogs.php'),
+                __DIR__.'/../config/blog.php' => config_path('blog.php'),
             ], 'blog-config');
         }
     }
@@ -138,7 +141,6 @@ class BlogServiceProvider extends ServiceProvider
     {
         $this->commands([
             \Chriscreates\Blog\Console\Commands\InstallCommand::class,
-            \Chriscreates\Blog\Console\Commands\PublishCommand::class,
             \Chriscreates\Blog\Console\Commands\SetupCommand::class,
         ]);
     }

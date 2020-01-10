@@ -16,5 +16,7 @@ $factory->define(Post::class, function (Faker $faker) {
         'content' => $faker->paragraph,
         'status' => 'published',
         'published_at' => now(),
+        'allow_comments' => true,
+        'allow_guest_comments' => true,
     ];
 });
