@@ -33,8 +33,6 @@ class InstallCommand extends Command
         $this->callSilent('vendor:publish', ['--tag' => 'blog-config']);
         $this->callSilent('migrate');
 
-        // TODO: Do we need to publish a provider?
-
         $this->info('Installation complete.');
     }
 }

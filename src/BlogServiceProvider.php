@@ -105,8 +105,6 @@ class BlogServiceProvider extends ServiceProvider
     private function handlePublishing()
     {
         if ($this->app->runningInConsole()) {
-
-            // TODO: Are these really needed?
             $this->publishes([
                 __DIR__.'/../database/factories/' => database_path('factories'),
             ], 'blog-factories');

@@ -10,6 +10,16 @@ use Illuminate\Support\Collection;
 class PostBuilder extends Builder
 {
     /**
+     * Return results where Posts are related for the current logged in user.
+     *
+     * @return \Chriscreates\Blog\Builders\PostBuilder
+     */
+    public function forCurrentUser() : PostBuilder
+    {
+        return $this->where('user_id', request()->user()->id ?? null);
+    }
+
+    /**
      * Return results where Posts have status.
      *
      * @param string $status

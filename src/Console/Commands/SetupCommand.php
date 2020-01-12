@@ -7,6 +7,7 @@ use Chriscreates\Blog\Post;
 use Chriscreates\Blog\Tag;
 use Illuminate\Console\Command;
 use Illuminate\Console\DetectsApplicationNamespace;
+use Illuminate\Support\Str;
 
 class SetupCommand extends Command
 {
@@ -44,8 +45,11 @@ class SetupCommand extends Command
             }
         }
 
+        if ( ! file_exists(app_path('Providers/BlogServiceProvider.php'))) {
+            $this->publishProvider();
+        }
+
         // TODO:
-        // Controllers
         // Routes
         // Views?
 
@@ -87,5 +91,39 @@ class SetupCommand extends Command
              $post->comments()->save(factory(Comment::class)->make());
              $post->comments()->save(factory(Comment::class)->make());
          });
+    }
+
+    /**
+     * Register the provider.
+     *
+     * @return void
+     */
+    private function publishProvider()
+    {
+        copy(
+            __DIR__.'/../../Providers/BlogServiceProvider.php',
+            app_path('Providers/BlogServiceProvider.php')
+        );
+
+        $namespace = Str::replaceLast('\\', '', $this->getAppNamespace());
+        $appConfig = file_get_contents(config_path('app.php'));
+
+        if (Str::contains($appConfig, $namespace.'\\Providers\\BlogServiceProvider::class')) {
+            return;
+        }
+
+        $lineEndingCount = [
+            "\r\n" => substr_count($appConfig, "\r\n"),
+            "\r" => substr_count($appConfig, "\r"),
+            "\n" => substr_count($appConfig, "\n"),
+        ];
+
+        $eol = array_keys($lineEndingCount, max($lineEndingCount))[0];
+
+        file_put_contents(config_path('app.php'), str_replace(
+            "{$namespace}\\Providers\EventServiceProvider::class,".$eol,
+            "{$namespace}\\Providers\EventServiceProvider::class,".$eol."        {$namespace}\Providers\BlogServiceProvider::class,".$eol,
+            $appConfig
+        ));
     }
 }
