@@ -30,8 +30,6 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-        $this->callSilent('vendor:publish', ['--tag' => 'blog-factories']);
-        $this->callSilent('vendor:publish', ['--tag' => 'blog-seeders']);
         $this->callSilent('vendor:publish', ['--tag' => 'blog-config']);
         $this->callSilent('migrate');
 

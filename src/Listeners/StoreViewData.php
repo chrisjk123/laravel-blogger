@@ -14,6 +14,6 @@ class StoreViewData
      */
     public function handle(PostViewed $event)
     {
-        logger('something happened.');
+        $event->post->increment('views');
     }
 }

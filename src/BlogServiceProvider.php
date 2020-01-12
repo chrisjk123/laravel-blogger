@@ -78,7 +78,6 @@ class BlogServiceProvider extends ServiceProvider
      */
     private function routeConfiguration()
     {
-        // TODO
         return [
             'namespace' => 'Blog\Http\Controllers',
             'prefix' => config('blog.path'),
@@ -111,11 +110,6 @@ class BlogServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../database/factories/' => database_path('factories'),
             ], 'blog-factories');
-
-            // TODO: Are these really needed?
-            $this->publishes([
-                __DIR__.'/../database/seeds/' => database_path('seeds'),
-            ], 'blog-seeders');
 
             $this->publishes([
                 __DIR__.'/../config/blog.php' => config_path('blog.php'),

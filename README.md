@@ -87,49 +87,40 @@ This package requires Laravel 5.8 or higher, PHP 7.2 or higher and a database th
 
 ## Installation
 
+> Note: Laravel Blogger requires you to have user authentication in place prior to installation.
+For Laravel 5.* based projects run the `make:auth` Artisan command.
+For Laravel 6.* based projects please see the official guide to get started.
+
 You can install the package via composer:
 
 ```bash
 composer require chrisjk123/laravel-blogger
 ```
 
-Publish the migrations with:
+Publish the primary configuration file using the `blog:install` Artisan command:
 
 ```bash
-php artisan vendor:publish --provider="Chriscreates\Blog\BloggerServiceProvider" --tag="migrations"
-php artisan migrate
-```
-
-You can optionally publish the config file with:
-
-```bash
-php artisan vendor:publish --provider="Chriscreates\Blog\BloggerServiceProvider" --tag="config"
+php artisan blog:install
 ```
 
 This is the contents of the published config file, if your `User` class is
 within a different directory or has a different primary key it can be changed here.
 
-Furthermore, the settings for allowing commenting on posts is set here, the default
-is set to true as well as guest commenting.
-
 ```php
-return [
-    /*
-     * User: the default path to the User model in Laravel and primary key
-     */
-    'user' => [
-        'user_class' => \App\User::class,
-        'user_key_name' => 'id',
-    ],
+/*
+|--------------------------------------------------------------------------
+| User relations
+|--------------------------------------------------------------------------
+|
+| This is the default path to the User model in Laravel and primary key.
+| You are free to change this path to anything you like.
+|
+*/
 
-    /*
-     * Post: allow commenting on posts / allow guest commenting on posts
-     */
-    'posts' => [
-        'allow_comments' => true,
-        'allow_guest_comments' => true,
-    ],
-];
+'user' => [
+    'user_class' => \App\User::class,
+    'user_key_name' => 'id',
+],
 ```
 
 ## Local testing
@@ -164,6 +155,34 @@ $user->posts;
 
 // Retrieve the comments created by the guest/user(s)
 $user->comments;
+```
+
+Furthermore, in the configuration file, the default is set to true for
+allowing both user and public commenting on posts is set here.
+
+```php
+/*
+ |--------------------------------------------------------------------------
+ | Post commenting options
+ |--------------------------------------------------------------------------
+ |
+ | The default for commenting on posts is enabled, as well as guest
+ | commenting. Feel free to change these conditions to false.
+ |
+ */
+
+'posts' => [
+    'allow_comments' => true,
+    'allow_guest_comments' => true,
+],
+```
+
+You can get setup quickly by using the `blog:setup` Artisan command.
+This publishes the routes, controllers and views. Optionally you can seed the
+database with `factory()` data by specifying the data `blog:setup --data` option.
+
+```bash
+php artisan blog:setup --data
 ```
 
 ### Changelog

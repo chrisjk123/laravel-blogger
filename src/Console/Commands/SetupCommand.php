@@ -17,7 +17,8 @@ class SetupCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'blog:setup {--data : Specifies that demo data should be seeded}';
+    protected $signature = 'blog:setup
+                            {--data : Setup the database with demo data}';
 
     /**
      * The console command description.
@@ -33,17 +34,30 @@ class SetupCommand extends Command
      */
     public function handle()
     {
+        if ( ! file_exists(config_path('blog.php'))) {
+            $this->error("You haven't published the config file.");
+
+            if ($this->confirm('Publish the config file?')) {
+                $this->call('blog:install');
+            } else {
+                return;
+            }
+        }
+
         // TODO:
         // Controllers
         // Routes
         // Views?
 
-        // Optionally seed the database with demo data
         if ($this->option('data')) {
+            $this->seed();
+        } elseif ($this->confirm(
+            'Would you like to setup the database with demo data?'
+        )) {
             $this->seed();
         }
 
-        $this->info('Setup complete');
+        $this->info('Setup complete.');
     }
 
     /**
@@ -53,14 +67,13 @@ class SetupCommand extends Command
      */
     private function seed()
     {
-        // TODO: Check that blog:install has been run before this blog:setup
+        $this->callSilent('vendor:publish', ['--tag' => 'blog-factories']);
 
-        // Publish factories
-        $files = collect(
-            array_diff(scandir(__DIR__.'/../../../database/factories/'), array('.', '..'))
-        )->each(function ($file) {
-            copy(__DIR__."/../../../database/factories/{$file}", database_path('factories')."/{$file}");
-        });
+        // $files = collect(
+        //     array_diff(scandir(__DIR__.'/../../../database/factories/'), array('.', '..'))
+        // )->each(function ($file) {
+        //     copy(__DIR__."/../../../database/factories/{$file}", database_path('factories')."/{$file}");
+        // });
 
         // Create data
         factory(Post::class, 20)
