@@ -2,12 +2,15 @@
 
 namespace App\Providers;
 
-use \Chriscreates\Blog\Post;
+use Chriscreates\Blog\Observers\PostObserver;
+use Chriscreates\Blog\Post;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 
 class BlogServiceProvider extends ServiceProvider
 {
+    protected $namespace = '\Chriscreates\Blog\Controllers';
+
     /**
      * Define your route model bindings, pattern filters, etc.
      *
@@ -23,6 +26,8 @@ class BlogServiceProvider extends ServiceProvider
                 ->orWhere('slug', 'LIKE', "%{$value}%");
             })->first();
         });
+
+        Post::observe(PostObserver::class);
     }
 
     /**
@@ -44,8 +49,7 @@ class BlogServiceProvider extends ServiceProvider
      */
     protected function mapBlogRoutes()
     {
-        Route::middleware('api')
-             ->namespace($this->namespace)
+        Route::namespace($this->namespace)
              ->group(base_path('routes/blog.php'));
     }
 }

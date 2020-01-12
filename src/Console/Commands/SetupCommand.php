@@ -45,12 +45,15 @@ class SetupCommand extends Command
             }
         }
 
+        if ( ! file_exists(base_path('routes/blog.php'))) {
+            $this->publishRoutes();
+        }
+
         if ( ! file_exists(app_path('Providers/BlogServiceProvider.php'))) {
             $this->publishProvider();
         }
 
         // TODO:
-        // Routes
         // Views?
 
         if ($this->option('data')) {
@@ -125,5 +128,18 @@ class SetupCommand extends Command
             "{$namespace}\\Providers\EventServiceProvider::class,".$eol."        {$namespace}\Providers\BlogServiceProvider::class,".$eol,
             $appConfig
         ));
+    }
+
+    /**
+     * Register the routes.
+     *
+     * @return void
+     */
+    private function publishRoutes()
+    {
+        copy(
+            __DIR__.'/../../../routes/web.php',
+            base_path('routes/blog.php')
+        );
     }
 }
