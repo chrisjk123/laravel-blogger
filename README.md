@@ -1,16 +1,17 @@
 # Add blog database tables to a Laravel app
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/chrisjk123/laravel-blogger.svg?style=flat-square)](https://packagist.org/packages/chrisjk123/laravel-blogger)
-[![Build Status](https://img.shields.io/travis/chrisjk123/laravel-blogger/master.svg?style=flat-square)](https://travis-ci.org/chrisjk123/laravel-blogger)
-[![Quality Score](https://img.shields.io/scrutinizer/g/chrisjk123/laravel-blogger.svg?style=flat-square)](https://scrutinizer-ci.com/g/chrisjk123/laravel-blogger)
-[![Total Downloads](https://img.shields.io/packagist/dt/chrisjk123/laravel-blogger.svg?style=flat-square)](https://packagist.org/packages/chrisjk123/laravel-blogger)
+[![build status](https://img.shields.io/travis/chrisjk123/laravel-blogger/master.svg?style=flat-square)](https://travis-ci.org/chrisjk123/laravel-blogger)
+[![stable: v1.0.1](https://img.shields.io/badge/License-IPL%201.0-blue.svg)](https://packagist.org/packages/chrisjk123/laravel-blogger)
+[![code quality](https://img.shields.io/scrutinizer/g/chrisjk123/laravel-blogger.svg?style=flat-square)](https://scrutinizer-ci.com/g/chrisjk123/laravel-blogger)
+[![downloads](https://img.shields.io/packagist/dt/chrisjk123/laravel-blogger.svg?style=flat-square)](https://packagist.org/packages/chrisjk123/laravel-blogger)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Table of Contents
 
 * [Introduction](#introduction)
 * [Requirements](#requirements)
 * [Installation](#installation)
-* [Local testing](#local-testing)
+* [Testing](#testing)
 * [Usage](#usage)
 * [Changelog](#changelog)
 * [Security](#security)
@@ -123,13 +124,12 @@ within a different directory or has a different primary key it can be changed he
 ],
 ```
 
-## Local testing
+## Testing
 
-For testing purposes, you can publish the factories with:
+Run the tests with:
 
 ```bash
-php artisan vendor:publish --provider="Chriscreates\Blog\BloggerServiceProvider" --tag="factories"
-php artisan vendor:publish --provider="Chriscreates\Blog\BloggerServiceProvider" --tag="seeders"
+composer test
 ```
 
 ## Usage
