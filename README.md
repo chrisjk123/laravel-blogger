@@ -1,7 +1,6 @@
 # Add blog database tables to a Laravel app
 
 [![build status](https://img.shields.io/travis/chrisjk123/laravel-blogger/master.svg?style=flat-square)](https://travis-ci.org/chrisjk123/laravel-blogger)
-[![stable: v1.0.1](https://img.shields.io/badge/License-IPL%201.0-blue.svg)](https://packagist.org/packages/chrisjk123/laravel-blogger)
 [![code quality](https://img.shields.io/scrutinizer/g/chrisjk123/laravel-blogger.svg?style=flat-square)](https://scrutinizer-ci.com/g/chrisjk123/laravel-blogger)
 [![downloads](https://img.shields.io/packagist/dt/chrisjk123/laravel-blogger.svg?style=flat-square)](https://packagist.org/packages/chrisjk123/laravel-blogger)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
