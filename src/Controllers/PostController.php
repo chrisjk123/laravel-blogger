@@ -4,8 +4,11 @@ namespace Chriscreates\Blog\Controllers;
 
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\SEOMeta;
+use Chriscreates\Blog\Category;
 use Chriscreates\Blog\Post;
 use Chriscreates\Blog\Requests\ValidatePostRequest;
+use Chriscreates\Blog\Tag;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -42,16 +45,22 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create-post');
+        $post = new Post;
+
+        return view('admin.posts.edit-post', [
+            'post' => $post,
+            'categories' => Category::all(),
+            'tags' => Tag::all(),
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\ValidatePostRequest  $request
-     * @return \Illuminate\Http\Response
+     * @param  \Chriscreates\Blog\Requests\ValidatePostRequest  $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(ValidatePostRequest $request)
+    public function store(ValidatePostRequest $request) : JsonResponse
     {
         $post = Post::create($request->only([
             'title',
@@ -64,9 +73,7 @@ class PostController extends Controller
             'allow_guest_comments',
         ]));
 
-        return redirect()
-        ->route('posts.edit', ['post' => $post->id])
-        ->with('success', 'Post created.');
+        return response()->json($post);
     }
 
     /**
@@ -98,17 +105,23 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('admin.posts.edit-post', compact('post'));
+        $post->load('category', 'tags');
+
+        return view('admin.posts.edit-post', [
+            'post' => $post,
+            'categories' => Category::all(),
+            'tags' => Tag::all(),
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\ValidatePostRequest  $request
+     * @param  \Chriscreates\Blog\Requests\ValidatePostRequest  $request
      * @param  \Chriscreates\Blog\Post  $post
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(ValidatePostRequest $request, Post $post)
+    public function update(ValidatePostRequest $request, Post $post) : JsonResponse
     {
         $post->update($request->only([
             'title',
@@ -121,23 +134,23 @@ class PostController extends Controller
             'allow_guest_comments',
         ]));
 
-        return redirect()
-        ->route('posts.edit', ['post' => $post->id])
-        ->with('success', 'Post updated.');
+        $post->refresh();
+
+        return response()->json($post);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \Chriscreates\Blog\Post  $post
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Post $post)
+    public function destroy(Post $post) : JsonResponse
     {
         $post->delete();
 
-        return redirect()
-        ->route('posts.index')
-        ->with('success', 'Post deleted.');
+        $post = new Post;
+
+        return response()->json($post);
     }
 }

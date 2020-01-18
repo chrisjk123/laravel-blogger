@@ -3,6 +3,7 @@
 namespace Chriscreates\Blog\Observers;
 
 use Chriscreates\Blog\Post;
+use Illuminate\Support\Facades\Auth;
 
 class PostObserver
 {
@@ -23,7 +24,7 @@ class PostObserver
         }
 
         if ( ! request()->filled('user_id')) {
-            $post->user_id = auth()->id();
+            $post->user_id = Auth::id();
         }
 
         if ( ! request()->filled('slug')) {
@@ -45,6 +46,8 @@ class PostObserver
     {
         $post->tags()->detach();
 
-        $post->comments()->delete();
+        if ($post->comments()) {
+            $post->comments()->delete();
+        }
     }
 }

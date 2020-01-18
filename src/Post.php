@@ -18,9 +18,9 @@ class Post extends Model
     PostsHaveComments,
     PostsHaveACategory;
 
-    const PUBLISHED = 'published';
-    const DRAFT = 'draft';
-    const SCHEDULED = 'scheduled';
+    public const PUBLISHED = 'published';
+    public const DRAFT = 'draft';
+    public const SCHEDULED = 'scheduled';
 
     protected $table = 'posts';
 
@@ -30,7 +30,13 @@ class Post extends Model
 
     public $timestamps = true;
 
-    protected $appends = ['tagsCount'];
+    protected $appends = [
+        'tags_count',
+        'statuses',
+        'friendly_status',
+        'view_path',
+        'delete_path',
+    ];
 
     protected $dates = ['published_at'];
 
@@ -153,5 +159,41 @@ class Post extends Model
             self::DRAFT,
             self::SCHEDULED,
         ]);
+    }
+
+    public function getStatusesAttribute()
+    {
+        return $this->statuses()->toArray();
+    }
+
+    public function getFriendlyStatusAttribute()
+    {
+        if ($this->isDraft()) {
+            return ucfirst(self::DRAFT);
+        }
+
+        if ($this->isScheduled()) {
+            return ucfirst(self::SCHEDULED)." for: {$this->published_at->format('d-m-Y')}";
+        }
+
+        return ucfirst(self::PUBLISHED);
+    }
+
+    public function getViewPathAttribute()
+    {
+        if ( ! $this->id) {
+            return '';
+        }
+
+        return route('posts.show', ['post' => $this->id]);
+    }
+
+    public function getDeletePathAttribute()
+    {
+        if ( ! $this->id) {
+            return '';
+        }
+
+        return route('posts.destroy', ['post' => $this->id]);
     }
 }

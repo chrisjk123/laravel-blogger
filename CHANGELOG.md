@@ -8,4 +8,5 @@ All notable changes to `blogger` will be documented in this file
 
 ## 1.0.1 - XX-XX-2020
 
-Updates to comments and tags
+- Updates to comments and tags
+- Add facades

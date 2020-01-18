@@ -106,6 +106,10 @@ class BlogServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
+                __DIR__.'/../public' => public_path('vendor/blog'),
+            ], 'blog-assets');
+
+            $this->publishes([
                 __DIR__.'/../database/factories/' => database_path('factories'),
             ], 'blog-factories');
 
