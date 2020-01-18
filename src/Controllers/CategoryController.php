@@ -3,26 +3,26 @@
 namespace Chriscreates\Blog\Controllers;
 
 use Chriscreates\Blog\Category;
+use Chriscreates\Blog\Requests\ValidateCategoryRequest;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     /**
-     * Instantiate a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() : JsonResponse
+    public function index()
+    {
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
     }
 
@@ -32,7 +32,24 @@ class CategoryController extends Controller
      * @param  \Chriscreates\Blog\Requests\ValidateCategoryRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ValidateCategoryRequest $request) : JsonResponse
+    public function store(ValidateCategoryRequest $request)
+    {
+        $category = Category::create($request->only([
+            'name',
+            'slug',
+            'parent_id',
+        ]));
+
+        return response()->json($category);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \Chriscreates\Blog\Category  $category
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Category $category)
     {
     }
 
@@ -42,18 +59,18 @@ class CategoryController extends Controller
      * @param  \Chriscreates\Blog\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category) : JsonResponse
+    public function edit(Category $category)
     {
     }
 
     /**
      * Update the specified resource in storage.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  \Chriscreates\Blog\Requests\ValidateCategoryRequest  $request
-     * @param  \Chriscreates\Blog\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(ValidateCategoryRequest $request, Category $category) : JsonResponse
+    public function update(ValidateCategoryRequest $request, Category $category)
     {
     }
 
@@ -63,7 +80,7 @@ class CategoryController extends Controller
      * @param  \Chriscreates\Blog\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category) : JsonResponse
+    public function destroy(Category $category)
     {
     }
 }

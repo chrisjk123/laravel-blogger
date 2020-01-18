@@ -47,7 +47,7 @@ class PostController extends Controller
     {
         $post = new Post;
 
-        return view('admin.posts.edit-post', [
+        return view('admin.posts.post', [
             'post' => $post,
             'categories' => Category::all(),
             'tags' => Tag::all(),
@@ -107,7 +107,7 @@ class PostController extends Controller
     {
         $post->load('category', 'tags');
 
-        return view('admin.posts.edit-post', [
+        return view('admin.posts.post', [
             'post' => $post,
             'categories' => Category::all(),
             'tags' => Tag::all(),

@@ -2,7 +2,9 @@
 
 namespace Chriscreates\Blog\Controllers;
 
+use Chriscreates\Blog\Requests\ValidateTagRequest;
 use Chriscreates\Blog\Tag;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
@@ -34,6 +36,12 @@ class TagController extends Controller
      */
     public function store(ValidateTagRequest $request) : JsonResponse
     {
+        $tag = Tag::create($request->only([
+            'name',
+            'slug',
+        ]));
+
+        return response()->json($tag);
     }
 
     /**
