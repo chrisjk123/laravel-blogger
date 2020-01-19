@@ -4,7 +4,7 @@
 [![build status](https://img.shields.io/travis/chrisjk123/laravel-blogger/master.svg?style=flat-square)](https://travis-ci.org/chrisjk123/laravel-blogger)
 [![code quality](https://img.shields.io/scrutinizer/g/chrisjk123/laravel-blogger.svg?style=flat-square)](https://scrutinizer-ci.com/g/chrisjk123/laravel-blogger)
 [![downloads](https://img.shields.io/packagist/dt/chrisjk123/laravel-blogger.svg?style=flat-square)](https://packagist.org/packages/chrisjk123/laravel-blogger)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 
 ## Table of Contents
 
