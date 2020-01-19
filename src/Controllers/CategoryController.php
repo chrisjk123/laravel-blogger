@@ -4,35 +4,27 @@ namespace Chriscreates\Blog\Controllers;
 
 use Chriscreates\Blog\Category;
 use Chriscreates\Blog\Requests\ValidateCategoryRequest;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class CategoryController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Instantiate a new controller instance.
      *
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    public function index()
+    public function __construct()
     {
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
+        $this->middleware('auth');
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Chriscreates\Blog\Requests\ValidateCategoryRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(ValidateCategoryRequest $request)
+    public function store(ValidateCategoryRequest $request) : JsonResponse
     {
         $category = Category::create($request->only([
             'name',
@@ -41,46 +33,5 @@ class CategoryController extends Controller
         ]));
 
         return response()->json($category);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \Chriscreates\Blog\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
-    {
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \Chriscreates\Blog\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Category $category)
-    {
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Chriscreates\Blog\Requests\ValidateCategoryRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function update(ValidateCategoryRequest $request, Category $category)
-    {
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \Chriscreates\Blog\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Category $category)
-    {
     }
 }

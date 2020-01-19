@@ -53,8 +53,9 @@ class SetupCommand extends Command
             $this->publishProvider();
         }
 
-        // TODO:
-        // Views?
+        // TODO: Checks
+        $this->callSilent('vendor:publish', ['--tag' => 'blog-assets']);
+        $this->callSilent('vendor:publish', ['--tag' => 'blog-views']);
 
         if ($this->option('data')) {
             $this->seed();

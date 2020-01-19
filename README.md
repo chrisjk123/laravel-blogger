@@ -178,7 +178,7 @@ allowing both user and public commenting on posts is set here.
 
 You can get setup quickly by using the `blog:setup` Artisan command.
 This publishes the routes, controllers and views. Optionally you can seed the
-database with `factory()` data by specifying the data `blog:setup --data` option.
+database with `factory()` data by specifying the data `--data` option.
 
 ```bash
 php artisan blog:setup --data
