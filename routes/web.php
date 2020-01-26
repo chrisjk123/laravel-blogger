@@ -6,4 +6,6 @@ Route::group(['middleware' => config('blog.middleware')], function () {
     Route::resource('categories', 'CategoryController');
 });
 
-Route::get('posts/{post}', 'PostController@show')->name('posts.show');
+Route::group(['middleware' => 'web'], function () {
+    Route::get('posts/{post}', 'PostController@show')->name('posts.show');
+});
