@@ -19,7 +19,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Route Middleware
+    | Route middleware
     |--------------------------------------------------------------------------
     |
     | These middleware will be attached to every route. You can add your own
@@ -46,4 +46,16 @@ return [
         'allow_comments' => true,
         'allow_guest_comments' => true,
     ],
+
+    /*
+     |--------------------------------------------------------------------------
+     | Blog table prefix
+     |--------------------------------------------------------------------------
+     |
+     | This is the prefix of the tables that will be created by the migrations
+     | and used by the models shipped with this package.
+     |
+     */
+
+    'table_prefix' => 'blog',
 ];

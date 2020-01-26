@@ -22,8 +22,6 @@ class Post extends Model
     public const DRAFT = 'draft';
     public const SCHEDULED = 'scheduled';
 
-    protected $table = 'posts';
-
     protected $primaryKey = 'id';
 
     public $guarded = ['id'];
@@ -39,6 +37,15 @@ class Post extends Model
     ];
 
     protected $dates = ['published_at'];
+
+    public function __construct(array $attributes = [])
+    {
+        if ( ! isset($this->table)) {
+            $this->setTable(config('blog.table_prefix', 'blog').'_posts');
+        }
+
+        parent::__construct($attributes);
+    }
 
     public function category()
     {

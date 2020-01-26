@@ -13,7 +13,7 @@ class CreateCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create(config('blog.table_prefix', 'blog').'_comments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->nullable();
             $table->index('user_id');
@@ -34,6 +34,6 @@ class CreateCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists(config('blog.table_prefix', 'blog').'_comments');
     }
 }

@@ -10,8 +10,6 @@ class Comment extends Model
 {
     use IsAuthorable;
 
-    protected $table = 'comments';
-
     protected $primaryKey = 'id';
 
     public $guarded = ['id'];
@@ -21,6 +19,15 @@ class Comment extends Model
     protected $casts = [
         'is_approved' => 'boolean',
     ];
+
+    public function __construct(array $attributes = [])
+    {
+        if ( ! isset($this->table)) {
+            $this->setTable(config('blog.table_prefix', 'blog').'_comments');
+        }
+
+        parent::__construct($attributes);
+    }
 
     public function commentable()
     {

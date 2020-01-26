@@ -35,7 +35,7 @@ class PostController extends Controller
         ->orderBy('created_at', 'desc')
         ->paginate(10);
 
-        return view('blog.admin.posts.posts', compact('posts'));
+        return view('admin.posts.posts', compact('posts'));
     }
 
     /**
@@ -47,7 +47,7 @@ class PostController extends Controller
     {
         $post = new Post;
 
-        return view('blog.admin.posts.post', [
+        return view('admin.posts.post', [
             'post' => $post,
             'categories' => Category::all(),
             'tags' => Tag::all(),
@@ -77,7 +77,6 @@ class PostController extends Controller
     }
 
     /**
-     * TODO
      * Display the specified resource.
      *
      * @param  \Chriscreates\Blog\Post  $post
@@ -108,7 +107,7 @@ class PostController extends Controller
     {
         $post->load('category', 'tags');
 
-        return view('blog.admin.posts.post', [
+        return view('admin.posts.post', [
             'post' => $post,
             'categories' => Category::all(),
             'tags' => Tag::all(),

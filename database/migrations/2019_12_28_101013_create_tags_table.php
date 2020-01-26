@@ -20,13 +20,15 @@ class CreateTagsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('taggables', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('tag_id');
-            $table->integer('taggable_id');
-            $table->string('taggable_type');
-            $table->timestamps();
-        });
+        if ( ! Schema::hasTable('taggables')) {
+            Schema::create('taggables', function (Blueprint $table) {
+                $table->increments('id');
+                $table->integer('tag_id');
+                $table->integer('taggable_id');
+                $table->string('taggable_type');
+                $table->timestamps();
+            });
+        }
     }
 
     /**
