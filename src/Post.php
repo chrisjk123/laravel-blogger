@@ -203,4 +203,12 @@ class Post extends Model
 
         return route('posts.destroy', ['post' => $this->id]);
     }
+
+    public function getParsedMarkdownAttribute()
+    {
+        $parsedown = new \Parsedown();
+        $markdown = $parsedown->text($this->content);
+
+        return $markdown;
+    }
 }

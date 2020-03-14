@@ -12,6 +12,11 @@ All notable changes to `blogger` will be documented in this file
 - Publishing of assets - currently dependant on ckeditor
 - PostController now have CRUD functionality
 
+## 1.1.0 - 19-01-2020
+
+- Moved away from CKEditor - pure parsed markdown handled by Vue
+- Provided support for better real-time content writing
+
 ### TODO/WIP:
 
 - TagController CRUD

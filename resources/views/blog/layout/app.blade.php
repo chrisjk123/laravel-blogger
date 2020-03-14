@@ -17,7 +17,7 @@
         <img src="/blog_logo.png" width="45" height="45" alt="">
       </a>
 
-      <!-- Right Side Of Navbar -->
+      {{-- Right Side Of Navbar --}}
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -47,14 +47,32 @@
   </main>
 </body>
 
-<!-- Scripts -->
-
+{{-- Scripts --}}
+<script src="https://unpkg.com/marked@0.3.6"></script>
+<script src="https://unpkg.com/lodash@4.16.0"></script>
 <script type="text/javascript" src="{{ asset('vendor/blog/js/app.js') }}"></script>
-<script type="text/javascript" src="{{ asset('vendor/blog/ckeditor/ckeditor.js') }}"></script>
+
 <script type="text/javascript">
-var element =  document.getElementById('editor');
-if (typeof(element) != 'undefined' && element != null) {
-  CKEDITOR.replace("editor");
+function toggleHightlightClass(addRemoveClass, className) {
+  const editorWrapper = document
+  .getElementById('markdownPreview')
+
+  if (editorWrapper == null) {
+    return false;
+  }
+
+  const codeElements = editorWrapper.getElementsByTagName('code');
+
+  for (let item of codeElements) {
+    if (addRemoveClass === 'addClass') {
+      item.classList.add(className);
+    } else {
+      item.classList.remove(className);
+    }
+  }
 }
+$(document).on('DOMNodeInserted', function(e) {
+  toggleHightlightClass('addClass', 'hljs');
+});
 </script>
 </html>

@@ -2,6 +2,7 @@
 
 namespace Chriscreates\Blog\Controllers;
 
+use App\Helpers\appHelper;
 use Artesaos\SEOTools\Facades\OpenGraph;
 use Artesaos\SEOTools\Facades\SEOMeta;
 use Chriscreates\Blog\Category;
@@ -89,10 +90,10 @@ class PostController extends Controller
         ->get();
 
         SEOMeta::setTitle($post->title)
-        ->setDescription($post->excerpt);
+        ->setDescription($post->excerpt ?? appHelper::ellipsisFormat($post->parsed_markdown, 200, $post->path()));
 
         OpenGraph::setTitle($post->title)
-        ->setDescription($post->excerpt);
+        ->setDescription($post->excerpt ?? appHelper::ellipsisFormat($post->parsed_markdown, 200, $post->path()));
 
         return view('posts.show', compact(['post', 'related_posts']));
     }

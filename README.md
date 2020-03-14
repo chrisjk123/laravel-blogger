@@ -124,6 +124,16 @@ within a different directory or has a different primary key it can be changed he
 ],
 ```
 
+Optionally you can follow the [artesaos/seotools](https://github.com/artesaos/seotools#in-your-view) guide to help
+provide some common SEO techniques for your public frontend:
+
+```html
+{{-- Within the head of your app.blade.php file --}}
+{!! SEOMeta::generate() !!}
+{!! OpenGraph::generate() !!}
+```
+
+
 ## Testing
 
 Run the tests with:
@@ -155,6 +165,11 @@ $user->posts;
 
 // Retrieve the comments created by the guest/user(s)
 $user->comments;
+```
+
+```html
+{{-- Print the published post markdown content --}}
+{!! $post->parsed_markdown !!}
 ```
 
 Furthermore, in the configuration file, the default is set to true for
