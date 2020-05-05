@@ -6,13 +6,10 @@ use Chriscreates\Blog\Comment;
 use Chriscreates\Blog\Post;
 use Chriscreates\Blog\Tag;
 use Illuminate\Console\Command;
-use Illuminate\Console\DetectsApplicationNamespace;
 use Illuminate\Support\Str;
 
 class SetupCommand extends Command
 {
-    use DetectsApplicationNamespace;
-
     /**
      * The name and signature of the console command.
      *
