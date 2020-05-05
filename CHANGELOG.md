@@ -17,6 +17,11 @@ All notable changes to `blogger` will be documented in this file
 - Moved away from CKEditor - pure parsed markdown handled by Vue
 - Provided support for better real-time content writing
 
+## 1.1.1 - 05-05-2020
+
+- Removed SEO dependencies, they shouldn't be  necessary
+- Laravel version should be anything from 5.8 above.
+
 ### TODO/WIP:
 
 - TagController CRUD

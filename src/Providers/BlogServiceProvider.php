@@ -50,6 +50,6 @@ class BlogServiceProvider extends ServiceProvider
     protected function mapBlogRoutes()
     {
         Route::namespace($this->namespace)
-             ->group(base_path('routes/blog.php'));
+        ->group(base_path('routes/blog.php'));
     }
 }

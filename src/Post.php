@@ -98,7 +98,7 @@ class Post extends Model
 
     public function path()
     {
-        return "/posts/{$this->slug}";
+        return route('blog.show', ['post' => $this->slug]);
     }
 
     public function setPublished()
@@ -192,7 +192,7 @@ class Post extends Model
             return '';
         }
 
-        return route('posts.show', ['post' => $this->id]);
+        return route('blog.show', ['post' => $this->id]);
     }
 
     public function getDeletePathAttribute()

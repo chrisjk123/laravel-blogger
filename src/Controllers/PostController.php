@@ -2,9 +2,6 @@
 
 namespace Chriscreates\Blog\Controllers;
 
-use App\Helpers\appHelper;
-use Artesaos\SEOTools\Facades\OpenGraph;
-use Artesaos\SEOTools\Facades\SEOMeta;
 use Chriscreates\Blog\Category;
 use Chriscreates\Blog\Post;
 use Chriscreates\Blog\Requests\ValidatePostRequest;
@@ -22,7 +19,7 @@ class PostController extends Controller
       */
     public function __construct()
     {
-        $this->middleware('auth')->except('show');
+        $this->middleware('auth');
     }
 
     /**
@@ -75,27 +72,6 @@ class PostController extends Controller
         ]));
 
         return response()->json($post);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \Chriscreates\Blog\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Post $post)
-    {
-        $related_posts = Post::relatedByPostTags($post)
-        ->take(3)
-        ->get();
-
-        SEOMeta::setTitle($post->title)
-        ->setDescription($post->excerpt ?? appHelper::ellipsisFormat($post->parsed_markdown, 200, $post->path()));
-
-        OpenGraph::setTitle($post->title)
-        ->setDescription($post->excerpt ?? appHelper::ellipsisFormat($post->parsed_markdown, 200, $post->path()));
-
-        return view('posts.show', compact(['post', 'related_posts']));
     }
 
     /**
